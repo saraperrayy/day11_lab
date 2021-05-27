@@ -1,3 +1,4 @@
+'use strict'
 
 // Add a button with the text "View Results", which when clicked displays the list of all the products followed by the votes received, and number of times seen for each. 
 // Example: banana had 3 votes, and was seen 5 times.
@@ -6,12 +7,11 @@
 const results = document.getElementById('product-clicks')
 const allProducts = document.getElementById('all_products')
 const leftProductImg = document.getElementById('left_product_img')
-const centerProductImg = document.getElementById('center_product_img') 
+const centerProductImg = document.getElementById('center_product_img')
 const rightProductImg = document.getElementById('right_product_img')
 const leftProductPEl = document.getElementById('left_product_p')
-const rightProductPEl = document.getElementById('center_product_p')
-const centerProductPEl = document.getElementById('right_product_p')
-
+const rightProductPEl = document.getElementById('right_product_p')
+const centerProductPEl = document.getElementById('center_product_p')
 
 let totalClicks = 0;
 
@@ -26,48 +26,45 @@ let rightProduct = null;
 
 const ProductPictures = function(name, imagePath) {
     this.name = name;
-    thisimagePath = imagePath;
+    this.imagePath = imagePath;
     this.clicks = 0;
     this.timesShown = 0;
 
-    ProductPictures.allProducts.push(this);
+    ProductPictures.allImages.push(this);
 }
 // added property to the Product Pictures object that is an array
-ProductPictures.allProducts = [];
+ProductPictures.allImages = [];
 
 const renderProducts = function() {
     leftProductImg.src = leftProduct.imagePath;
     centerProductImg.src = centerProduct.imagePath;
     rightProductImg.src = rightProduct.imagePath;
     // add image as text content in a paragraph
-    leftProductPEl.textContent = leftProduct.imagePath;
-    centerProductPEl.textContent = cennterProduct.imagePath;
-    rightProductPEl.textContent = rightProduct.imagePath;
+    leftProductPEl.textContent = leftProduct.name;
+    centerProductPEl.textContent = centerProduct.name;
+    rightProductPEl.textContent = rightProduct.name;
 }
 
 // write a function that picks three different products
 function productPicker() {
     // function picks three items at random
-    let leftIndex = Math.floor(Math.random() * ProductPictures.allProducts.length)
-    let centerIndex = Math.floor(Math.random() * ProductPictures.allProducts.length)
-    let rightIndex = Math.floor(Math.random() * ProductPictures.allProducts.length)
-    // different index number 
+    let leftIndex = Math.floor(Math.random() * ProductPictures.allImages.length)
+    let centerIndex = Math.floor(Math.random() * ProductPictures.allImages.length)
+    let rightIndex = Math.floor(Math.random() * ProductPictures.allImages.length)
+    // // different index number 
     // want the loop to continue so long as any pair of three variables arent equal
-    while (rightIndex === leftIndex 
-        || rightIndex === centerIndex 
-        || centerIndex === leftIndex
-        || ProductPictures.lastShown.includes(leftIndex)
-        || ProductPictures.lastShown.includes(centerIndex)
-        || ProductPictures.lastShown.includes(rightIndex)) {
-        
-        leftIndex = Math.floor(Math.random() * ProductPictures.allProducts.length);
-        centerIndex = Math.floor(Math.random() * ProductPictures.allProducts.length);    
-        rightIndex = Math.floor(Math.random() * ProductPictures.allProducts.length);
-    }
-    leftProduct = ProductPictures.allProducts[leftIndex].timesShown++;
-    centerProduct = ProductPictures.allProducts[centerIndex].timesShown++;
-    rightProduct = ProductPictures.allProducts[rightIndex].timesShown++;
+    while (rightIndex === leftIndex || rightIndex === centerIndex || centerIndex === leftIndex) {
+        rightIndex = Math.floor(Math.random() * ProductPictures.allImages.length);
+        }
+    leftProduct = ProductPictures.allImages[leftIndex];
+    centerProduct = ProductPictures.allImages[centerIndex];
+    rightProduct = ProductPictures.allImages[rightIndex];
 }
+
+    // ProductPictures.lastShown[0] = leftIndex;
+    // ProductPictures.lastShown[1] = centerIndex;
+    // ProductPictures.lastShown[2] = rightIndex;
+
 
 // display vote counts function
 function displayVoteCount() {
@@ -75,7 +72,7 @@ function displayVoteCount() {
     let h2Elem = document.createElement('h2')
     h2Elem.textContent = 'Product Likes'
     results.appendChild(h2Elem);
-    for (let product of ProductPictures.allProducts) {
+    for (let product of ProductPictures.allImages) {
         const liElem = document.createElement('li');
         liElem.textContent = `${product.name}: ${product.clicks}`
         results.appendChild(liElem)
@@ -93,28 +90,32 @@ function handleClick(event) {
     // compare left and right product to what was clicked on
     // if users vote 25 times or less, do this:
     if (totalClicks < 25) {
-        if (id === 'left_product_img' || id === 'right_product_image' || id === 'center_product_image') {
+        // if (id === 'left_product_img' || id === 'right_product_img' || id === 'center_product_img') {
         // increment votes total
         //increment votes for the product clicked on
             if (id === 'left_product_img') {
                 leftProduct.clicks++;
-            } else {
+                // code executed if first left product image condition is false & right product image condition is true 
+            } else if (id === 'right_product_img') {
                 rightProduct.clicks++;
+            } else {
+                centerProduct.clicks++;
             }
             totalClicks++;
             leftProduct.timesShown++;
             centerProduct.timesShown++;
-            rightProduct.timesShown++
+            rightProduct.timesShown++;
             productPicker();
             renderProducts();
         }
-    }
-    // once user goes through 25 rounds, end loop
+    
+    // once user goes through 25 rounds, end event
     if (totalClicks === 25) {
         allProducts.removeEventListener('click', handleClick);
         displayVoteCount();
     }
-}
+}    
+
 new ProductPictures('bag','assets/bag.jpeg');
 new ProductPictures('banana','assets/banana.jpeg');
 new ProductPictures('bathroom','assets/bathroom.jpeg');
@@ -123,18 +124,19 @@ new ProductPictures('breakfast','assets/breakfast.jpeg');
 new ProductPictures('bubblegum','assets/bubblegum.jpeg');
 new ProductPictures('chair','assets/chair.jpeg');
 new ProductPictures('cthulhu','assets/cthulhu.jpeg');
-new ProductPictures('dog Duck','assets/dog-duck.jpeg');
+new ProductPictures('dog duck','assets/dog-duck.jpeg');
 new ProductPictures('dragon','assets/dragon.jpeg');
 new ProductPictures('pen','assets/pen.jpeg');
-new ProductPictures('pet sweep','assets/pet-sweet.jpeg');
-new ProductPictures('Scissors','assets/scissors.jpeg');
+new ProductPictures('pet sweep','assets/pet-sweep.jpeg');
+new ProductPictures('scissors','assets/scissors.jpeg');
 new ProductPictures('shark','assets/shark.jpeg');
-new ProductPictures('sweep','assets/sweep.jpeg');
+new ProductPictures('sweep','assets/sweep.png');
 new ProductPictures('tauntaun','assets/tauntaun.jpeg');
 new ProductPictures('unicorn','assets/unicorn.jpeg');
 new ProductPictures('water can','assets/water-can.jpeg');
 new ProductPictures('wine glass','assets/wine-glass.jpeg');
 
+// add the event listener
 allProducts.addEventListener('click', handleClick);
 productPicker();
 renderProducts();
