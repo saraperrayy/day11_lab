@@ -1,102 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-</head>
-<body>
-
-  <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-   <link rel="stylesheet" href="css/style.css">
-    <title>BusMall</title>
-</head>
+    <meta charset="utf-8">
+    <title>Bus Mall Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  </head>
+
 <body>
-  <header class='container'>
-    <p>Click fave plz. kthx!</p>
-  </header>
-  <section id='images' class='container'>
-    <img src="" alt="" id='img1' class='four columns'>
-    <img src="" alt="" id='img2' class='four columns'>
-    <img src="" alt="" id='img3' class='four columns'>
-  </section>
-  <section class='container'>
-    <button type="button" name="button" id='showResults' hidden>View Results</button>
-    <button type='button' name='reset' id='reset' hidden>Reset</button>
-    <section id='results'>
-    </section>
-  </section>
-  
-
-    <!-- <header>
-      <nav>
-        <ul>
-          <li>Home</li>
-          <li>About BusMall</li>
-          <li>Find a BusMall</li>
-        </ul>
-      </nav>
-      <h1>Vote for your favorite products</h1>
+    <header class='container'>
+        <p>Click fave plz. kthx!</p>
     </header>
-    <main>
-        <section id="instructions">
-            <h2>Instructions</h2>
-            <p>Thank you for participating in our product research. You will have 25 rounds to select your favorite from a series of three images each round.</p>
-            <p>Thank you for your support of BusMall!</p>
+    <section id='images' class='container'>
+        <img src="" alt="" id='img1' class='four columns'>
+        <img src="" alt="" id='img2' class='four columns'>
+        <img src="" alt="" id='img3' class='four columns'>
+    </section>
+    <section class='container'>
+        <button type="button" name="button" id='showResults' hidden>View Results</button>
+        <button type='button' name='reset' id='reset' hidden>Reset</button>
+        <section id='results'>
+
+            <button id="view-results-btn" hidden> view results</button>
+            <button id="reset-btn" hidden>reset</button>
         </section>
-      
-      <section id="all_products"></section>
-      <h2>Product Images</h2>
-       -->
-      <!-- left product
-      <div id="left_product"> 
-        <img id="left_product_img" src="assets/bag.jpeg" alt="bag">
-        
-        <p id="left_product_p">Bag</p>
-      </div>
-
-      <!-- center product -->
-      <!-- <div id="center_product">
-        <img id="center_product_img" src="assets/banana.jpeg" alt="banana">
-        
-        <p id="center_product_p">Banana</p> -->
-      <!-- </div> -->
-
-      <!-- right product -->
-      <!-- <div id="right_product">
-        <img id="right_product_img" src="assets/tauntaun.jpeg" alt="tauntaun">
-        
-        <p id="right_product_p">Tauntaun</p> --> 
-      <!-- </div> -->
-    <!-- </section> -->
-
-     <section>
-        <ul id="product-clicks">
-          <h2>Product Likes</h2>
-              <li>bathroom : 0</li>
-              <li>boots : 0</li>
-              <li>breakfast : 0</li>
-              <li>bubblegum : 0</li>
-              <li>chair : 0</li>
-              <li>cthulhu : 0</li>
-              <li>dog duck : 0</li>
-              <li>dragon : 0</li>
-              <li>pen : 0</li>
-              <li>pet sweep : 0</li>
-              <li>scissors : 0</li>
-              <li>shark : 0</li>
-              <li>sweep : 0</li>
-              <li>tauntaun : 0</li>
-              <li>unicorn : 0</li>
-              <li>water can : 0</li>
-              <li>wine glass : 0</li>
-            </ul>
-     </section>
-     </main>
-    <script src="busmall.js"></script>
+    </section>
+    <!-- <div id="thanks">
+      <div id="chartDisplayArea"><canvas id="myChart" width="600" height="400"></canvas></div> -->
+  </div>
+    <!-- <script type="text/javascript" src='js/chart.js'></script> -->
+    <script src="js/busmall.js"></script>
 </body>
+
 </html>
